@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./SignIn.scss";
 import "antd/dist/antd.css";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { LoginFormPage, ProFormText } from "@ant-design/pro-components";
+import { Button, Checkbox, Form, Input } from "antd";
 import accountService from "../../../Service/AccountService";
 
 function SignIn() {
@@ -29,53 +28,69 @@ function SignIn() {
   return (
     <>
       <div id="signin-page">
-        <div
-          style={{
-            height: "calc(100vh - 48px)",
-            margin: -24,
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
           }}
+          wrapperCol={{
+            span: 16,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
         >
-          <LoginFormPage
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            backgroundImageUrl="https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png"
-            logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
-            title="Github"
-            subTitle="Github"
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Please input your username!",
+              },
+            ]}
           >
-            <>
-              <ProFormText
-                name="username"
-                fieldProps={{
-                  size: "large",
-                  prefix: <UserOutlined className={"prefixIcon"} />,
-                }}
-                placeholder={" admin or user"}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter!",
-                  },
-                ]}
-              />
-              <ProFormText.Password
-                name="password"
-                fieldProps={{
-                  size: "large",
-                  prefix: <LockOutlined className={"prefixIcon"} />,
-                }}
-                placeholder={" ant.design"}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter",
-                  },
-                ]}
-              />
-            </>
-          </LoginFormPage>
-        </div>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
     </>
   );
