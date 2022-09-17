@@ -1,0 +1,13 @@
+#create-post {
+  width: 50%;
+  margin-top: 365px;
+  margin-left: -66rem;
+
+  .pick__reactions {
+    display: none;
+
+    &:hover {
+      display: flex;
+    }
+  }
+}
